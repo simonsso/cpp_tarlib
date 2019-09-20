@@ -1,5 +1,5 @@
 CXX      := clang++
-CXXFLAGS := -Wall -Wextra -Werror -Wno-sign-compare -Wno-unused-variable -fexceptions -Wno-unused-function  -std=c++17 -DDRYRUN -ggdb
+CXXFLAGS := -Wall -Wextra -Werror -Wno-sign-compare -Wno-unused-variable -fexceptions -Wno-unused-function  -std=c++17 -ggdb
 CFLAGS := -Wall -Wextra -Werror -Wno-sign-compare -Wno-unused-variable -fexceptions -Wno-unused-function 
 LDFLAGS  := -L/usr/lib -lstdc++ -lm -Llibbase -Llibpcrecpp -Llibprocessgroup
 LD := clang
@@ -37,6 +37,6 @@ release: CXXFLAGS += -O2
 release: all
 
 clean:
-	-@rm -fv $(OBJECTS)
 	-@rm -rvf $(OBJ_DIR)/*
 	-@rm -rvf $(PROGRAMS)
+	-@rm -fv $(OBJECTS)
