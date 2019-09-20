@@ -13,5 +13,5 @@ addons:
   env:
   - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
 script:
-  - cd src/examples
+  - cd src/example
   - make
