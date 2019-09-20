@@ -6,7 +6,7 @@ LD := clang
 BUILD    := ./build
 OBJ_DIR  := $(BUILD)/objects
 APP_DIR  := $(BUILD)
-INCLUDE  := -I./ -I../tarlib/
+INCLUDEPATH  := -I../tarlib/
 EXTSRC      := $(wildcard ../tarlib/*.cpp)
 SRC      := $(wildcard *.cpp)
 
@@ -17,11 +17,11 @@ all: $(PROGRAMS)
 
 $(OBJ_DIR)/%.o: %.cpp
 	@mkdir -p $(@D)
-	$(CXX) $(CXXFLAGS) $(INCLUDE) -o $@ -c $<
+	$(CXX) $(CXXFLAGS) $(INCLUDEPATH) -o $@ -c $<
 
 %: %.cpp $(OBJECTS)
 	@mkdir -p $(@D)
-	$(CXX) $(INCLUDE) $(LDFLAGS) $< $(OBJECTS)  -o $@
+	$(CXX) $(INCLUDEPATH) $(LDFLAGS) $< $(OBJECTS)  -o $@
 
 .PHONY: all build clean debug release
 
