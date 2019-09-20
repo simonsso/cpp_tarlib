@@ -9,12 +9,20 @@ APP_DIR  := $(BUILD)
 INCLUDEPATH  := -I../src/
 EXTSRC      := $(wildcard ../src/*.cpp)
 SRC      := $(wildcard *.cpp)
+TESTSRC    := $(wildcard test*.cpp)
+TESTS	:= $(TESTSRC:%.cpp=%.run)
 
 OBJECTS := $(EXTSRC:%.cpp=$(OBJ_DIR)/%.o)
 PROGRAMS := $(SRC:%.cpp=%.exe)
 
 all: $(PROGRAMS)
 	@echo Done
+
+tests: $(TESTS)
+
+%.run: %.exe
+	@echo Run test $<
+	./$<
 
 $(OBJ_DIR)/%.o: %.cpp
 	@mkdir -p $(@D)
