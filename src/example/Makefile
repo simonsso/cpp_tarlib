@@ -11,15 +11,16 @@ EXTSRC      := $(wildcard ../tarlib/*.cpp)
 SRC      := $(wildcard *.cpp)
 
 OBJECTS := $(EXTSRC:%.cpp=$(OBJ_DIR)/%.o)
-PROGRAMS := $(SRC:%.cpp=%)
+PROGRAMS := $(SRC:%.cpp=%.exe)
 
 all: $(PROGRAMS)
+	@echo Done
 
 $(OBJ_DIR)/%.o: %.cpp
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) $(INCLUDEPATH) -o $@ -c $<
 
-%: %.cpp $(OBJECTS)
+%.exe: %.cpp $(OBJECTS)
 	@mkdir -p $(@D)
 	$(CXX) $(INCLUDEPATH) $(LDFLAGS) $< $(OBJECTS)  -o $@
 
@@ -36,5 +37,6 @@ release: CXXFLAGS += -O2
 release: all
 
 clean:
+	-@rm -fv $(OBJECTS)
 	-@rm -rvf $(OBJ_DIR)/*
 	-@rm -rvf $(PROGRAMS)
