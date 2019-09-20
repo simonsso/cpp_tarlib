@@ -10,9 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: makeexamples
-      run: |
-        cd src/example
-        make
+      run:
+        (cd src/example ; make )
     - name: make check
       run: make check
     - name: make distcheck
