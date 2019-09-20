@@ -6,8 +6,8 @@ LD := clang
 BUILD    := ./build
 OBJ_DIR  := $(BUILD)/objects
 APP_DIR  := $(BUILD)
-INCLUDEPATH  := -I../tarlib/
-EXTSRC      := $(wildcard ../tarlib/*.cpp)
+INCLUDEPATH  := -I../src/
+EXTSRC      := $(wildcard ../src/*.cpp)
 SRC      := $(wildcard *.cpp)
 
 OBJECTS := $(EXTSRC:%.cpp=$(OBJ_DIR)/%.o)

@@ -11,4 +11,4 @@ jobs:
     - uses: actions/checkout@v1
     - name: makeexamples
       run:
-        (cd src/example ; make )
+        (cd examples ; make )
