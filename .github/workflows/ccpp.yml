@@ -12,3 +12,6 @@ jobs:
     - name: makeexamples
       run:
         (cd examples ; make )
+    - name: maketests
+      run:
+        (cd examples ; make tests )
