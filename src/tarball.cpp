@@ -84,10 +84,6 @@ void LOCALNS::Tar::_endRecord(std::size_t len) {
 }
 
 LOCALNS::Tar::Tar(std::ostream &out) : _finished(false), out(out) {
-  // TODO if (sizeof(PosixTarHeader) != 512) {
-  // TODO how to handle this sanity check ...
-  // TODO THROW(sizeof(PosixTarHeader));
-  // TODO }
 }
 
 LOCALNS::Tar::~Tar() {
@@ -160,3 +156,6 @@ bool LOCALNS::Tar::putFile(const char *filename, const char *nameInArchive) {
   _endRecord(len);
   return true;
 }
+
+static_assert(sizeof(PosixTarHeader) == 512, "Tar block size must be 512");
+
