@@ -160,3 +160,5 @@ bool LOCALNS::Tar::putFile(const char *filename, const char *nameInArchive) {
   _endRecord(len);
   return true;
 }
+
+static_assert(sizeof(PosixTarHeader) == 511, "Tar block size must be 512");
