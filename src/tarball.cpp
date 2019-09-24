@@ -43,6 +43,8 @@ void LOCALNS::Tar::_init(void *header) {
   std::strcpy(TARHEADER->version, " ");
   std::sprintf(TARHEADER->mtime, "%011lo", time(NULL));
   std::sprintf(TARHEADER->mode, "%07o", 0644);
+  std::sprintf(TARHEADER->uid, "%07o", default_uid);
+  std::sprintf(TARHEADER->gid, "%07o", default_gid);
   std::sprintf(TARHEADER->gname, "%s", "users");
 }
 
@@ -83,7 +85,7 @@ void LOCALNS::Tar::_endRecord(std::size_t len) {
   }
 }
 
-LOCALNS::Tar::Tar(std::ostream &out) : _finished(false), out(out) {
+LOCALNS::Tar::Tar(std::ostream &out) : _finished(false), default_uid(0), default_gid(0) , out(out){
   // TODO if (sizeof(PosixTarHeader) != 512) {
   // TODO how to handle this sanity check ...
   // TODO THROW(sizeof(PosixTarHeader));
@@ -95,7 +97,22 @@ LOCALNS::Tar::~Tar() {
     std::cerr << "[warning]tar file was not finished." << std::endl;
   }
 }
+/**
+ * Flush the pipe
+*/
+void LOCALNS::Tar::flush() {
+   out.flush();
+}
 
+
+/**
+ * Set uid and gid for items created from now
+ *
+*/
+void LOCALNS::Tar::setDefaultUser(int uid,int gid) {
+   default_uid=uid;
+   default_gid=gid;
+}
 /** writes 2 empty blocks. Should be always called before closing the Tar file
  */
 void LOCALNS::Tar::finish() {
