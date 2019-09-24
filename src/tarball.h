@@ -22,6 +22,8 @@ namespace io {
 class Tar {
 private:
   bool _finished;
+  int default_uid;
+  int default_gid;
 
 protected:
   std::ostream &out;
@@ -37,6 +39,8 @@ public:
   /** writes 2 empty blocks. Should be always called before closing the Tar file
    */
   void finish();
+  void flush();
+  void setDefaultUser(int uid,int gid);
   bool put(const char *filename, const std::string &s);
   bool put(const char *filename, const char *content);
   bool put(const char *filename, const char *content, std::size_t len);
